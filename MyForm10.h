@@ -1,4 +1,5 @@
 #pragma once
+//#include"MyForm4.h"
 using namespace MySql::Data::MySqlClient;
 namespace UMSPROJECT1 {
 
@@ -38,7 +39,7 @@ namespace UMSPROJECT1 {
 	private: System::Windows::Forms::Label^ Sid;
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::Button^ button1;
-	private: System::Windows::Forms::Button^ CancelButton;
+
 
 	protected:
 
@@ -59,7 +60,6 @@ namespace UMSPROJECT1 {
 			this->Sid = (gcnew System::Windows::Forms::Label());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->CancelButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// label1
@@ -67,7 +67,7 @@ namespace UMSPROJECT1 {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Showcard Gothic", 19.875F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(361, 198);
+			this->label1->Location = System::Drawing::Point(286, 175);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(486, 66);
 			this->label1->TabIndex = 0;
@@ -107,25 +107,12 @@ namespace UMSPROJECT1 {
 			this->button1->UseVisualStyleBackColor = false;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm10::button1_Click);
 			// 
-			// CancelButton
-			// 
-			this->CancelButton->BackColor = System::Drawing::SystemColors::ActiveCaption;
-			this->CancelButton->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->CancelButton->Location = System::Drawing::Point(1010, 552);
-			this->CancelButton->Name = L"CancelButton";
-			this->CancelButton->Size = System::Drawing::Size(152, 69);
-			this->CancelButton->TabIndex = 4;
-			this->CancelButton->Text = L"Cancel";
-			this->CancelButton->UseVisualStyleBackColor = false;
-			// 
 			// MyForm10
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ActiveBorder;
-			this->ClientSize = System::Drawing::Size(1184, 706);
-			this->Controls->Add(this->CancelButton);
+			this->ClientSize = System::Drawing::Size(1014, 657);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->Sid);
@@ -148,17 +135,25 @@ namespace UMSPROJECT1 {
 		MySqlConnection^ studentR = gcnew MySqlConnection(removeconnection);
 		try {
 			studentR->Open();
-			String^ geog = "REMOVE FROM addstudent WHERE StudentId==@StudentID";
+			String^ geog = "DELETE FROM addstudent WHERE StudentID=@StudentID";
 			MySqlCommand^ sindhi = gcnew MySqlCommand(geog, studentR);
 			sindhi->Parameters->AddWithValue("@StudentID",textBox1->Text);
+
 			int done = sindhi->ExecuteNonQuery();
 			if (done > 0) {
-				MessageBox::Show("Congratulations You Have Successfully Remove Student", "Congratulations Message", MessageBoxButtons::OK, MessageBoxIcon::Hand);
+				MessageBox::Show("Congratulations You Have Successfully Remove Student", "Congratulations Message", MessageBoxButtons::OK);
 			}
 			else {
 				MessageBox::Show("Please Check Student ID", "Student ID!", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
 		}
+		catch(MySqlException^dodo){
+			MessageBox::Show("Error! " + dodo->Message, " Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		finally {
+			studentR->Close();
+		}
 	}
+
 };
 }

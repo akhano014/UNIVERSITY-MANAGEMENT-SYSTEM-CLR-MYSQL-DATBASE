@@ -18,6 +18,11 @@ namespace UMSPROJECT1 {
         MyForm5(void)
         {
             InitializeComponent();
+            this->ClientSize = System::Drawing::Size(800,750);
+            this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+            this->MaximizeBox = false;
+            this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+            this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
             //
             //TODO: Add the constructor code here
             //
@@ -187,9 +192,9 @@ namespace UMSPROJECT1 {
             this->TimingCombo->Font = (gcnew System::Drawing::Font(L"Sitka Small", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->TimingCombo->FormattingEnabled = true;
-            this->TimingCombo->Items->AddRange(gcnew cli::array< System::Object^  >(8) {
+            this->TimingCombo->Items->AddRange(gcnew cli::array< System::Object^  >(9) {
                 L"08:30-09:30", L"09:30-10:30", L"10:30-11:30",
-                    L"11:30-12:30", L"12:30-01:25", L"01:30-02:30", L"02:30-03:30", L"03:30-04:30"
+                    L"11:30-12:30", L"12:30-01:25", L"01:30-02:30", L"02:30-03:30", L"03:30-04:30", L"04:30-05:30"
             });
             this->TimingCombo->Location = System::Drawing::Point(392, 703);
             this->TimingCombo->Margin = System::Windows::Forms::Padding(4);
@@ -505,12 +510,37 @@ namespace UMSPROJECT1 {
             MessageBox::Show("Please Select Course Section", "Validation Error",MessageBoxButtons::OK, MessageBoxIcon::Error);
             return;
         }
+        String^ TeacherN = textBox3->Text;
+        String^ CourseT = textBox1->Text;
+        String^ Timingg = TimingCombo->Text;
+        String^ daya = DayCombo->Text;
+        String^ Roomnoo = RoomCombo->Text;
+        String^ SectionN = sectionCombo->Text;
+
+       
         //MySql connection
         String^ courseconnection = "server=127.0.0.1;port=3306;user id=root;password=8787;database=ums;AllowPublicKeyRetrieval=true;SslMode=None;";
         MySqlConnection^ course = gcnew MySqlConnection(courseconnection);
         try {
             course->Open();
-            //MySql Command to insert data into table that I have created in MySql DataBase 
+
+
+            String^ recheck = "SELECT COUNT(*) FROM addcourse WHERE CourseTitle=@CourseTitle AND TeacherName=@TeacherName AND Timing=@Timing AND Day=@Day AND Room_No=@RoomNo AND SectionName=@SectionName";
+            MySqlCommand^ checko = gcnew MySqlCommand(recheck, course);
+            checko->Parameters->AddWithValue("@CourseTitle",CourseT);
+            checko->Parameters->AddWithValue("@TeacherName", TeacherN);
+            checko->Parameters->AddWithValue("@Timing",Timingg);
+            checko->Parameters->AddWithValue("@Day",daya);
+            checko->Parameters->AddWithValue("@RoomNo",Roomnoo);
+            checko->Parameters->AddWithValue("@SectionName",SectionN);
+
+            int paf =Convert::ToInt32 (checko->ExecuteScalar());
+            if (paf > 0) {
+                MessageBox::Show("Error: These AddCourse Entities Course Title, Teacher Name,Timing,Day,Room Number and Section Name Already Exists", "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                course->Close();
+                return;
+            }
+ 
             String^ coursedata = "INSERT INTO addcourse(CourseTitle,CourseID,TeacherName,TeacherEmail,CreditHours,Timing,Day,CourseType,ClassType,Room_No,SectionName) VALUES(@CourseTitle,@CourseID,@TeacherName,@TeacherEmail,@CreditHours,@Timing,@Day,@CourseType,@ClassType,@RoomNo,@SectionName)";
             MySqlCommand^ cos = gcnew MySqlCommand(coursedata, course);
             cos->Parameters->AddWithValue("@CourseTitle", textBox1->Text);
@@ -526,7 +556,7 @@ namespace UMSPROJECT1 {
             cos->Parameters->AddWithValue("@SectionName", section);
 
           
-            String^ checkMessage = "Parameters:\n" +
+            /*String^ checkMessage = "Parameters:\n" +
                 "CourseTitle: " + textBox1->Text + "\n" +
                 "CourseID: " + textBox2->Text + "\n" +
                 "TeacherName: " + textBox3->Text + "\n" +
@@ -538,7 +568,7 @@ namespace UMSPROJECT1 {
                 "ClassType: " + classtype + "\n" +
                 "RoomNo: " + room + "\n" +
                 "SectionName: " + section;
-            MessageBox::Show(checkMessage, "Check Parameters list");
+            MessageBox::Show(checkMessage, "Check Parameters list");*/
 
             int coursefill = cos->ExecuteNonQuery();
             if (coursefill > 0) {
@@ -549,7 +579,13 @@ namespace UMSPROJECT1 {
             }
         }
         catch (MySqlException^ ss) {
-            MessageBox::Show("Error: " + ss->Message,"Error!",MessageBoxButtons::OK,MessageBoxIcon::Error);
+            if (ss->Number == 1062) {
+                MessageBox::Show("Error: A course is already scheduled at this Timing, Room Number, and Section Name.", "Scheduling Conflict", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            }
+            else
+            {
+                MessageBox::Show("Error: " + ss->Message, "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+            }
         }
         finally {
             course->Close();

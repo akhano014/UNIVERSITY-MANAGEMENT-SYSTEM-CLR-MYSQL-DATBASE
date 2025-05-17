@@ -188,11 +188,11 @@ namespace UMSPROJECT1 {
 #pragma endregion
 	private: System::Void sigin_Click(System::Object^ sender, System::EventArgs^ e) {
 		if (String::IsNullOrEmpty(textBox1->Text)) {
-			MessageBox::Show("Please Enter UserName!", "User Name!!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Please Enter UserName!", "User Name!", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
 		}
 		if (String::IsNullOrEmpty(textBox2->Text)) {
-			MessageBox::Show("Please Enter Password!", "Password!!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Please Enter Password!", "Password!", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
 		}
 		/*if (comboBox1->SelectedItem == 0) {
@@ -201,7 +201,7 @@ namespace UMSPROJECT1 {
 		}*/
 		String^ role = comboBox1->SelectedItem ? comboBox1->SelectedItem->ToString() : nullptr;
 		if (String::IsNullOrEmpty(role)) {
-			MessageBox::Show("Please Enter Valid Role", "Role!!",MessageBoxButtons::OK, MessageBoxIcon::Error);
+			MessageBox::Show("Please Select Valid Role", "Role!",MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
 		}
 
@@ -223,11 +223,14 @@ namespace UMSPROJECT1 {
 				main->ShowDialog();
 			}
 			else {
-				MessageBox::Show("Error Please Enter or Select Valid Value","Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				MessageBox::Show("Error Please Check User-Name, Password and Role ","Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			}
 		}
 		catch (MySqlException^ edd) {
-			MessageBox::Show("Error " + edd->Message);
+			MessageBox::Show("Error: " + edd->Message,"Error!",MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
+		catch (Exception^ edd) {
+			MessageBox::Show("Error: " + edd->Message,"Error!",MessageBoxButtons::OK,MessageBoxIcon::Error);
 		}
 		finally {
 			signin->Close();

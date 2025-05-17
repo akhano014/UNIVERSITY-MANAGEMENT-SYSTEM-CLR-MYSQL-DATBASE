@@ -4,6 +4,8 @@
 #include"MyForm71.h"
 #include"MyForm8.h"
 #include"MyForm9.h"
+#include"MyForm10.h"
+#include"MyForm11.h"
 namespace UMSPROJECT1 {
 
 	using namespace System;
@@ -22,6 +24,11 @@ namespace UMSPROJECT1 {
 		MyForm4(void)
 		{
 			InitializeComponent();
+			this->ClientSize = System::Drawing::Size(850,800);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+			this->MaximizeBox = false;
+			this->WindowState = System::Windows::Forms::FormWindowState::Normal;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			//
 			//TODO: Add the constructor code here
 			//
@@ -59,6 +66,11 @@ namespace UMSPROJECT1 {
 	private: System::Windows::Forms::Label^ choice;
 	private: System::Windows::Forms::ComboBox^ comboBox1;
 	private: System::Windows::Forms::Button^ Search;
+	private: System::Windows::Forms::Label^ ROOM;
+	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::Label^ label4;
 
 
 
@@ -88,6 +100,11 @@ namespace UMSPROJECT1 {
 			this->choice = (gcnew System::Windows::Forms::Label());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->Search = (gcnew System::Windows::Forms::Button());
+			this->ROOM = (gcnew System::Windows::Forms::Label());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// acourse
@@ -97,20 +114,20 @@ namespace UMSPROJECT1 {
 				static_cast<System::Byte>(0)));
 			this->acourse->Location = System::Drawing::Point(87, 165);
 			this->acourse->Name = L"acourse";
-			this->acourse->Size = System::Drawing::Size(213, 48);
+			this->acourse->Size = System::Drawing::Size(281, 48);
 			this->acourse->TabIndex = 0;
-			this->acourse->Text = L"Add Course";
+			this->acourse->Text = L"1. ADD COURSE";
 			// 
 			// removecoruse
 			// 
 			this->removecoruse->AutoSize = true;
 			this->removecoruse->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->removecoruse->Location = System::Drawing::Point(87, 238);
+			this->removecoruse->Location = System::Drawing::Point(87, 239);
 			this->removecoruse->Name = L"removecoruse";
-			this->removecoruse->Size = System::Drawing::Size(282, 48);
+			this->removecoruse->Size = System::Drawing::Size(363, 48);
 			this->removecoruse->TabIndex = 1;
-			this->removecoruse->Text = L"Remove Course";
+			this->removecoruse->Text = L"2. REMOVE COURSE";
 			// 
 			// ateacher
 			// 
@@ -119,92 +136,92 @@ namespace UMSPROJECT1 {
 				static_cast<System::Byte>(0)));
 			this->ateacher->Location = System::Drawing::Point(87, 318);
 			this->ateacher->Name = L"ateacher";
-			this->ateacher->Size = System::Drawing::Size(229, 48);
+			this->ateacher->Size = System::Drawing::Size(309, 48);
 			this->ateacher->TabIndex = 2;
-			this->ateacher->Text = L"Add Teacher";
+			this->ateacher->Text = L"3. ADD TEACHER";
 			// 
 			// removeteacher
 			// 
 			this->removeteacher->AutoSize = true;
 			this->removeteacher->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->removeteacher->Location = System::Drawing::Point(87, 403);
+			this->removeteacher->Location = System::Drawing::Point(87, 395);
 			this->removeteacher->Name = L"removeteacher";
-			this->removeteacher->Size = System::Drawing::Size(298, 48);
+			this->removeteacher->Size = System::Drawing::Size(388, 48);
 			this->removeteacher->TabIndex = 3;
-			this->removeteacher->Text = L"Remove Teacher";
+			this->removeteacher->Text = L"4. REMOVE TEACHER";
 			// 
 			// astudent
 			// 
 			this->astudent->AutoSize = true;
 			this->astudent->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->astudent->Location = System::Drawing::Point(87, 476);
+			this->astudent->Location = System::Drawing::Point(87, 475);
 			this->astudent->Name = L"astudent";
-			this->astudent->Size = System::Drawing::Size(228, 48);
+			this->astudent->Size = System::Drawing::Size(310, 48);
 			this->astudent->TabIndex = 4;
-			this->astudent->Text = L"Add Student";
+			this->astudent->Text = L"5. ADD STUDENT";
 			// 
 			// removestudent
 			// 
 			this->removestudent->AutoSize = true;
 			this->removestudent->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->removestudent->Location = System::Drawing::Point(87, 559);
+			this->removestudent->Location = System::Drawing::Point(86, 551);
 			this->removestudent->Name = L"removestudent";
-			this->removestudent->Size = System::Drawing::Size(297, 48);
+			this->removestudent->Size = System::Drawing::Size(389, 48);
 			this->removestudent->TabIndex = 5;
-			this->removestudent->Text = L"Remove Student";
+			this->removestudent->Text = L"6. REMOVE STUDENT";
 			// 
 			// TWT
 			// 
 			this->TWT->AutoSize = true;
 			this->TWT->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->TWT->Location = System::Drawing::Point(87, 649);
+			this->TWT->Location = System::Drawing::Point(86, 626);
 			this->TWT->Name = L"TWT";
-			this->TWT->Size = System::Drawing::Size(446, 48);
+			this->TWT->Size = System::Drawing::Size(549, 48);
 			this->TWT->TabIndex = 6;
-			this->TWT->Text = L"Teacher Wise Time Table";
+			this->TWT->Text = L"7. TEACHER WISE TIME TABLE";
 			// 
 			// SWT
 			// 
 			this->SWT->AutoSize = true;
 			this->SWT->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->SWT->Location = System::Drawing::Point(87, 744);
+			this->SWT->Location = System::Drawing::Point(87, 714);
 			this->SWT->Name = L"SWT";
-			this->SWT->Size = System::Drawing::Size(438, 48);
+			this->SWT->Size = System::Drawing::Size(541, 48);
 			this->SWT->TabIndex = 7;
-			this->SWT->Text = L"Section Wise Time Table";
+			this->SWT->Text = L"8. SECTION WISE TIME TABLE";
 			// 
 			// RWT
 			// 
 			this->RWT->AutoSize = true;
 			this->RWT->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->RWT->Location = System::Drawing::Point(87, 835);
+			this->RWT->Location = System::Drawing::Point(86, 793);
 			this->RWT->Name = L"RWT";
-			this->RWT->Size = System::Drawing::Size(408, 48);
+			this->RWT->Size = System::Drawing::Size(493, 48);
 			this->RWT->TabIndex = 8;
-			this->RWT->Text = L"Room Wise Time Table";
+			this->RWT->Text = L"9. ROOM WISE TIME TABLE";
 			// 
 			// DWT
 			// 
 			this->DWT->AutoSize = true;
 			this->DWT->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->DWT->Location = System::Drawing::Point(87, 920);
+			this->DWT->Location = System::Drawing::Point(87, 889);
 			this->DWT->Name = L"DWT";
-			this->DWT->Size = System::Drawing::Size(377, 48);
+			this->DWT->Size = System::Drawing::Size(471, 48);
 			this->DWT->TabIndex = 9;
-			this->DWT->Text = L"Day Wise Time Table";
+			this->DWT->Text = L"10. DAY WISE TIME TABLE";
 			// 
 			// choice
 			// 
 			this->choice->AutoSize = true;
 			this->choice->Font = (gcnew System::Drawing::Font(L"Sitka Small", 14, System::Drawing::FontStyle::Bold));
-			this->choice->Location = System::Drawing::Point(200, 1067);
+			this->choice->Location = System::Drawing::Point(182, 1409);
 			this->choice->Name = L"choice";
 			this->choice->Size = System::Drawing::Size(398, 57);
 			this->choice->TabIndex = 10;
@@ -217,14 +234,14 @@ namespace UMSPROJECT1 {
 			this->comboBox1->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(10) {
-				L"Add Course", L"Remove Course", L"Add Teacher",
-					L"Remove Teacher", L"Add Student", L"Remove Student", L"Teacher Wise Time Table", L"Section Wise Time Table", L"Room Wise Time Table",
-					L"Day Wise Time Table"
+			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(15) {
+				L"ADD COURSE", L"REMOVE COURSE", L"ADD TEACHER",
+					L"REMOVE TEACHER", L"ADD STUDENT ", L"REMOVE STUDENT", L"TEACHER WISE TIME TABLE", L"SECTION WISE TIME TABLE", L"ROOM WISE TIME TABLE",
+					L"DAY WISE TIME TABLE", L"ADD ROOM", L"ADD SECTION", L"VIEW ALL COURSES", L"VIEW ALL TEACHERS", L"VIEW ALL STUDENTS"
 			});
-			this->comboBox1->Location = System::Drawing::Point(608, 1069);
+			this->comboBox1->Location = System::Drawing::Point(586, 1409);
 			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(689, 56);
+			this->comboBox1->Size = System::Drawing::Size(854, 56);
 			this->comboBox1->TabIndex = 11;
 			// 
 			// Search
@@ -232,7 +249,7 @@ namespace UMSPROJECT1 {
 			this->Search->BackColor = System::Drawing::SystemColors::ActiveCaption;
 			this->Search->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->Search->Location = System::Drawing::Point(1371, 1067);
+			this->Search->Location = System::Drawing::Point(1463, 1409);
 			this->Search->Name = L"Search";
 			this->Search->Size = System::Drawing::Size(207, 65);
 			this->Search->TabIndex = 12;
@@ -240,12 +257,72 @@ namespace UMSPROJECT1 {
 			this->Search->UseVisualStyleBackColor = false;
 			this->Search->Click += gcnew System::EventHandler(this, &MyForm4::Search_Click);
 			// 
+			// ROOM
+			// 
+			this->ROOM->AutoSize = true;
+			this->ROOM->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->ROOM->Location = System::Drawing::Point(87, 972);
+			this->ROOM->Name = L"ROOM";
+			this->ROOM->Size = System::Drawing::Size(263, 48);
+			this->ROOM->TabIndex = 13;
+			this->ROOM->Text = L"11. ADD ROOM";
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(83, 1048);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(314, 48);
+			this->label1->TabIndex = 14;
+			this->label1->Text = L"12. ADD SECTION";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label2->Location = System::Drawing::Point(87, 1128);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(418, 48);
+			this->label2->TabIndex = 15;
+			this->label2->Text = L"13. VIEW ALL COURSES";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label3->Location = System::Drawing::Point(86, 1209);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(443, 48);
+			this->label3->TabIndex = 16;
+			this->label3->Text = L"14. VIEW ALL TEACHERS";
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label4->Location = System::Drawing::Point(87, 1294);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(443, 48);
+			this->label4->TabIndex = 17;
+			this->label4->Text = L"15. VIEW ALL STUDENTS";
+			// 
 			// MyForm4
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ActiveBorder;
-			this->ClientSize = System::Drawing::Size(1728, 1456);
+			this->ClientSize = System::Drawing::Size(1728, 1500);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->ROOM);
 			this->Controls->Add(this->Search);
 			this->Controls->Add(this->comboBox1);
 			this->Controls->Add(this->choice);
@@ -274,32 +351,45 @@ namespace UMSPROJECT1 {
 			MessageBox::Show("Please Select Valid Value", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
 		}
-		if (lol == "Add Course") {
+		if (lol == "ADD COURSE") {
 			this->Hide();
 			MyForm5^ addcourse = gcnew MyForm5();
 			addcourse->ShowDialog();
 		}
-		if (lol == "Remove Course") {
+		if (lol == "REMOVE COURSE") {
 			this->Hide();
 			MyForm6^sherag = gcnew MyForm6();
 			sherag->ShowDialog();
 
 		}
-		if (lol == "Add Teacher") {
+		if (lol == "ADD TEACHER") {
 			this->Hide();
 			MyForm7^ addt = gcnew MyForm7();
 			addt->ShowDialog();
 		}
-		if (lol == "Remove Teacher") {
+		if (lol == "REMOVE TEACHER") {
 			this->Hide();
 			MyForm8^ geoba = gcnew MyForm8();
 			geoba->ShowDialog();
 			
+			
 		}
-		if (lol == "Add Student") {
+		if (lol == "ADD STUDENT") {
 			this->Hide();
 			MyForm9^ paf = gcnew MyForm9();
 			paf->ShowDialog();
+
+		}
+		if (lol == "REMOVE STUDENT") {
+			this->Hide();
+			MyForm10^ suto = gcnew MyForm10();
+			suto->ShowDialog();
+			//this->Show();
+		}
+		if (lol == "TEACHER WISE TIME TABLE") {
+			this->Hide();
+			MyForm11^ dhuwan = gcnew MyForm11();
+			dhuwan->ShowDialog();
 		}
 	    
 	}
