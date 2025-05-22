@@ -38,7 +38,7 @@ namespace UMSPROJECT1 {
 	private: System::Windows::Forms::Label^ username;
 	private: System::Windows::Forms::Label^ password;
 	private: System::Windows::Forms::Label^ role;
-	private: System::Windows::Forms::Button^ sigin;
+
 	protected:
 
 	protected:
@@ -49,6 +49,7 @@ namespace UMSPROJECT1 {
 	private: System::Windows::Forms::TextBox^ textBox1;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::Button^ okButton;
 
 	private:
 		/// <summary>
@@ -66,11 +67,11 @@ namespace UMSPROJECT1 {
 			this->username = (gcnew System::Windows::Forms::Label());
 			this->password = (gcnew System::Windows::Forms::Label());
 			this->role = (gcnew System::Windows::Forms::Label());
-			this->sigin = (gcnew System::Windows::Forms::Button());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->okButton = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// username
@@ -105,19 +106,6 @@ namespace UMSPROJECT1 {
 			this->role->Size = System::Drawing::Size(95, 48);
 			this->role->TabIndex = 2;
 			this->role->Text = L"Role";
-			// 
-			// sigin
-			// 
-			this->sigin->BackColor = System::Drawing::SystemColors::InactiveCaption;
-			this->sigin->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->sigin->Location = System::Drawing::Point(749, 676);
-			this->sigin->Name = L"sigin";
-			this->sigin->Size = System::Drawing::Size(123, 60);
-			this->sigin->TabIndex = 3;
-			this->sigin->Text = L"OK";
-			this->sigin->UseVisualStyleBackColor = false;
-			this->sigin->Click += gcnew System::EventHandler(this, &MyForm3::sigin_Click);
 			// 
 			// comboBox1
 			// 
@@ -164,17 +152,30 @@ namespace UMSPROJECT1 {
 			this->label1->TabIndex = 7;
 			this->label1->Text = L"ADMINISTRATOR SIGN IN";
 			// 
+			// okButton
+			// 
+			this->okButton->BackColor = System::Drawing::SystemColors::ActiveCaption;
+			this->okButton->Font = (gcnew System::Drawing::Font(L"Sitka Small", 12, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->okButton->Location = System::Drawing::Point(770, 592);
+			this->okButton->Name = L"okButton";
+			this->okButton->Size = System::Drawing::Size(125, 71);
+			this->okButton->TabIndex = 8;
+			this->okButton->Text = L"OK";
+			this->okButton->UseVisualStyleBackColor = false;
+			this->okButton->Click += gcnew System::EventHandler(this, &MyForm3::okButton_Click);
+			// 
 			// MyForm3
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(12, 25);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ActiveBorder;
-			this->ClientSize = System::Drawing::Size(911, 789);
+			this->ClientSize = System::Drawing::Size(962, 769);
+			this->Controls->Add(this->okButton);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->comboBox1);
-			this->Controls->Add(this->sigin);
 			this->Controls->Add(this->role);
 			this->Controls->Add(this->password);
 			this->Controls->Add(this->username);
@@ -186,55 +187,55 @@ namespace UMSPROJECT1 {
 
 		}
 #pragma endregion
-	private: System::Void sigin_Click(System::Object^ sender, System::EventArgs^ e) {
-		if (String::IsNullOrEmpty(textBox1->Text)) {
-			MessageBox::Show("Please Enter UserName!", "User Name!", MessageBoxButtons::OK, MessageBoxIcon::Error);
-			return;
-		}
-		if (String::IsNullOrEmpty(textBox2->Text)) {
-			MessageBox::Show("Please Enter Password!", "Password!", MessageBoxButtons::OK, MessageBoxIcon::Error);
-			return;
-		}
-		/*if (comboBox1->SelectedItem == 0) {
-			MessageBox::Show("Please Select Valid Role!", "Validation Error");
-			return;
-		}*/
-		String^ role = comboBox1->SelectedItem ? comboBox1->SelectedItem->ToString() : nullptr;
-		if (String::IsNullOrEmpty(role)) {
-			MessageBox::Show("Please Select Valid Role", "Role!",MessageBoxButtons::OK, MessageBoxIcon::Error);
-			return;
-		}
+private: System::Void okButton_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (String::IsNullOrEmpty(textBox1->Text)) {
+		MessageBox::Show("Please Enter UserName!", "User Name!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
+	if (String::IsNullOrEmpty(textBox2->Text)) {
+		MessageBox::Show("Please Enter Password!", "Password!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
+	/*if (comboBox1->SelectedItem == 0) {
+		MessageBox::Show("Please Select Valid Role!", "Validation Error");
+		return;
+	}*/
+	String^ role = comboBox1->SelectedItem ? comboBox1->SelectedItem->ToString() : nullptr;
+	if (String::IsNullOrEmpty(role)) {
+		MessageBox::Show("Please Select Valid Role", "Role!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
 
-		String^ signcoonection = "server = 127.0.0.1;port = 3306;user id = root;password = 8787;database = ums;AllowPublicKeyRetrieval = true;SslMode = None;";
-		MySqlConnection^ signin = gcnew MySqlConnection(signcoonection);
-		try {
-			signin->Open();
-			
-			String^ select = "SELECT COUNT(*) FROM admin WHERE UserName =@UserName AND Password =@Password AND Role=@Role";
-			MySqlCommand^ cdd = gcnew MySqlCommand(select, signin);
-			cdd->Parameters->AddWithValue("@UserName", textBox1->Text);
-			cdd->Parameters->AddWithValue("@Password", textBox2->Text);
-			cdd->Parameters->AddWithValue("@Role", role);
-			int done = Convert::ToInt32(cdd->ExecuteScalar());
-			if (done > 0) {
-				MessageBox::Show("Administrator Log-in Successfully","Log in");
-				this->Hide();
-				MyForm4^ main = gcnew MyForm4();
-				main->ShowDialog();
-			}
-			else {
-				MessageBox::Show("Error Please Check User-Name, Password and Role ","Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-			}
+	String^ signcoonection = "server = 127.0.0.1;port = 3306;user id = root;password = 8787;database = ums;AllowPublicKeyRetrieval = true;SslMode = None;";
+	MySqlConnection^ signin = gcnew MySqlConnection(signcoonection);
+	try {
+		signin->Open();
+
+		String^ select = "SELECT COUNT(*) FROM admin WHERE UserName =@UserName AND Password =@Password AND Role=@Role";
+		MySqlCommand^ cdd = gcnew MySqlCommand(select, signin);
+		cdd->Parameters->AddWithValue("@UserName", textBox1->Text);
+		cdd->Parameters->AddWithValue("@Password", textBox2->Text);
+		cdd->Parameters->AddWithValue("@Role", role);
+		int done = Convert::ToInt32(cdd->ExecuteScalar());
+		if (done > 0) {
+			MessageBox::Show("Administrator Log-in Successfully", "Log in");
+			this->Hide();
+			MyForm4^ main = gcnew MyForm4();
+			main->ShowDialog();
 		}
-		catch (MySqlException^ edd) {
-			MessageBox::Show("Error: " + edd->Message,"Error!",MessageBoxButtons::OK, MessageBoxIcon::Error);
-		}
-		catch (Exception^ edd) {
-			MessageBox::Show("Error: " + edd->Message,"Error!",MessageBoxButtons::OK,MessageBoxIcon::Error);
-		}
-		finally {
-			signin->Close();
+		else {
+			MessageBox::Show("Error Please Check User-Name, Password and Role ", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		}
 	}
+	catch (MySqlException^ edd) {
+		MessageBox::Show("Error: " + edd->Message, "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+	catch (Exception^ edd) {
+		MessageBox::Show("Error: " + edd->Message, "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
+	finally {
+		signin->Close();
+	}
+}
 };
 }

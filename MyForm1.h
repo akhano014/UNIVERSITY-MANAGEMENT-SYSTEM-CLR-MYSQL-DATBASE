@@ -102,14 +102,28 @@ namespace UMSPROJECT1 {
 	
 	private: System::Void reg_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Hide();
-		MyForm2^ registe = gcnew MyForm2();
-		registe->ShowDialog();
+		try
+		{
+			MyForm2^ registe = gcnew MyForm2();
+			registe->ShowDialog();
+			this->Show();
+		}
+		catch (Exception^ exoa) {
+			MessageBox::Show("Error: " + exoa->Message, "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
 		
 	}
 	private: System::Void signin_Click(System::Object^ sender, System::EventArgs^ e) {
 		this->Hide();
-		MyForm3^ sign = gcnew MyForm3();
-		sign->ShowDialog();
+		try
+		{
+			MyForm3^ sign = gcnew MyForm3();
+			sign->ShowDialog();
+			this->Show();
+		}
+		catch (Exception^ exoa) {
+			MessageBox::Show("Error: " + exoa->Message, "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		}
 	}
 	};
 }

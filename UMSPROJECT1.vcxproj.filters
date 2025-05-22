@@ -60,6 +60,27 @@
     <ClCompile Include="AddSection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AddRoom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomWIseTT.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Removesection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Removeroom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddDay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RemoveDay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomWiseTT1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyForm.h">
@@ -102,6 +123,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AddSection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddRoom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomWIseTT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Removesection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Removeroom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddDay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RemoveDay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomWiseTT1.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

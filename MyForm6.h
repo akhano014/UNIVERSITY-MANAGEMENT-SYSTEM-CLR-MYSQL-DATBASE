@@ -132,6 +132,7 @@ namespace UMSPROJECT1 {
 			this->Controls->Add(this->courseID);
 			this->Margin = System::Windows::Forms::Padding(6);
 			this->Name = L"MyForm6";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"REMOVE COURSE";
 			this->ResumeLayout(false);
 			this->PerformLayout();

@@ -122,6 +122,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AddDay.cpp" />
+    <ClCompile Include="AddRoom.cpp" />
     <ClCompile Include="AddSection.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="MyForm1.cpp" />
@@ -135,10 +137,21 @@
     <ClCompile Include="MyForm71.cpp" />
     <ClCompile Include="MyForm8.cpp" />
     <ClCompile Include="MyForm9.cpp" />
+    <ClCompile Include="RemoveDay.cpp" />
+    <ClCompile Include="Removeroom.cpp" />
+    <ClCompile Include="Removesection.cpp" />
+    <ClCompile Include="RoomWIseTT.cpp" />
+    <ClCompile Include="RoomWiseTT1.cpp" />
     <ClCompile Include="SectionWiseTT.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddDay.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="AddRoom.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="AddSection.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -178,11 +191,32 @@
     <ClInclude Include="MyForm9.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="RemoveDay.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Removeroom.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Removesection.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="RoomWIseTT.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="RoomWiseTT1.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="SectionWiseTT.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AddDay.resx">
+      <DependentUpon>AddDay.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddRoom.resx">
+      <DependentUpon>AddRoom.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddSection.resx">
       <DependentUpon>AddSection.h</DependentUpon>
     </EmbeddedResource>
@@ -221,6 +255,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm9.resx">
       <DependentUpon>MyForm9.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RemoveDay.resx">
+      <DependentUpon>RemoveDay.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Removeroom.resx">
+      <DependentUpon>Removeroom.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Removesection.resx">
+      <DependentUpon>Removesection.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoomWIseTT.resx">
+      <DependentUpon>RoomWIseTT.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RoomWiseTT1.resx">
+      <DependentUpon>RoomWiseTT1.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SectionWiseTT.resx">
       <DependentUpon>SectionWiseTT.h</DependentUpon>

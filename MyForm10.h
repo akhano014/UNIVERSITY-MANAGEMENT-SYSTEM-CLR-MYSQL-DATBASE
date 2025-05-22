@@ -141,7 +141,7 @@ namespace UMSPROJECT1 {
 
 			int done = sindhi->ExecuteNonQuery();
 			if (done > 0) {
-				MessageBox::Show("Congratulations You Have Successfully Remove Student", "Congratulations Message", MessageBoxButtons::OK);
+				MessageBox::Show("Congratulations you have successfully remove student", "Congratulations Message", MessageBoxButtons::OK,MessageBoxIcon::Information);
 			}
 			else {
 				MessageBox::Show("Please Check Student ID", "Student ID!", MessageBoxButtons::OK, MessageBoxIcon::Error);

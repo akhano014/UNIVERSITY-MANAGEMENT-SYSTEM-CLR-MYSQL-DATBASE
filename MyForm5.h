@@ -209,10 +209,6 @@ namespace UMSPROJECT1 {
             this->DayCombo->Font = (gcnew System::Drawing::Font(L"Sitka Small", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->DayCombo->FormattingEnabled = true;
-            this->DayCombo->Items->AddRange(gcnew cli::array< System::Object^  >(5) {
-                L"Monday", L"Tuesday", L"Wednesday", L"Thursday",
-                    L"Friday"
-            });
             this->DayCombo->Location = System::Drawing::Point(392, 804);
             this->DayCombo->Margin = System::Windows::Forms::Padding(4);
             this->DayCombo->Name = L"DayCombo";
@@ -279,9 +275,9 @@ namespace UMSPROJECT1 {
             this->Romm->Location = System::Drawing::Point(64, 1117);
             this->Romm->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
             this->Romm->Name = L"Romm";
-            this->Romm->Size = System::Drawing::Size(172, 48);
+            this->Romm->Size = System::Drawing::Size(126, 48);
             this->Romm->TabIndex = 14;
-            this->Romm->Text = L"Room No";
+            this->Romm->Text = L"Room ";
             // 
             // RoomCombo
             // 
@@ -290,10 +286,6 @@ namespace UMSPROJECT1 {
             this->RoomCombo->Font = (gcnew System::Drawing::Font(L"Sitka Small", 10.875F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                 static_cast<System::Byte>(0)));
             this->RoomCombo->FormattingEnabled = true;
-            this->RoomCombo->Items->AddRange(gcnew cli::array< System::Object^  >(7) {
-                L"4-01", L"4-02", L"4-03", L"4-17", L"4-18", L"4-19",
-                    L""
-            });
             this->RoomCombo->Location = System::Drawing::Point(392, 1115);
             this->RoomCombo->Margin = System::Windows::Forms::Padding(4);
             this->RoomCombo->Name = L"RoomCombo";
@@ -453,6 +445,7 @@ namespace UMSPROJECT1 {
             this->Name = L"MyForm5";
             this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
             this->Text = L"ADD COURSE";
+            this->Load += gcnew System::EventHandler(this, &MyForm5::MyForm5_Load);
             this->ResumeLayout(false);
             this->PerformLayout();
 
@@ -510,12 +503,12 @@ namespace UMSPROJECT1 {
             MessageBox::Show("Please Select Course Section", "Validation Error",MessageBoxButtons::OK, MessageBoxIcon::Error);
             return;
         }
-        String^ TeacherN = textBox3->Text;
+      /*  String^ TeacherN = textBox3->Text;
         String^ CourseT = textBox1->Text;
         String^ Timingg = TimingCombo->Text;
         String^ daya = DayCombo->Text;
         String^ Roomnoo = RoomCombo->Text;
-        String^ SectionN = sectionCombo->Text;
+        String^ SectionN = sectionCombo->Text;*/
 
        
         //MySql connection
@@ -525,7 +518,7 @@ namespace UMSPROJECT1 {
             course->Open();
 
 
-            String^ recheck = "SELECT COUNT(*) FROM addcourse WHERE CourseTitle=@CourseTitle AND TeacherName=@TeacherName AND Timing=@Timing AND Day=@Day AND Room_No=@RoomNo AND SectionName=@SectionName";
+           /* String^ recheck = "SELECT COUNT(*) FROM addcourse WHERE CourseTitle=@CourseTitle AND TeacherName=@TeacherName AND Timing=@Timing AND Day=@Day AND Room_No=@RoomNo AND SectionName=@SectionName";
             MySqlCommand^ checko = gcnew MySqlCommand(recheck, course);
             checko->Parameters->AddWithValue("@CourseTitle",CourseT);
             checko->Parameters->AddWithValue("@TeacherName", TeacherN);
@@ -539,7 +532,7 @@ namespace UMSPROJECT1 {
                 MessageBox::Show("Error: These AddCourse Entities Course Title, Teacher Name,Timing,Day,Room Number and Section Name Already Exists", "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
                 course->Close();
                 return;
-            }
+            }*/
  
             String^ coursedata = "INSERT INTO addcourse(CourseTitle,CourseID,TeacherName,TeacherEmail,CreditHours,Timing,Day,CourseType,ClassType,Room_No,SectionName) VALUES(@CourseTitle,@CourseID,@TeacherName,@TeacherEmail,@CreditHours,@Timing,@Day,@CourseType,@ClassType,@RoomNo,@SectionName)";
             MySqlCommand^ cos = gcnew MySqlCommand(coursedata, course);
@@ -580,16 +573,67 @@ namespace UMSPROJECT1 {
         }
         catch (MySqlException^ ss) {
             if (ss->Number == 1062) {
-                MessageBox::Show("Error: A course is already scheduled at this Timing, Room Number, and Section Name.", "Scheduling Conflict", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                MessageBox::Show("Error: A course is already scheduled at this Timing, Room Number, and Section Name.", "Scheduling Conflict!", MessageBoxButtons::OK, MessageBoxIcon::Error);
             }
             else
             {
                 MessageBox::Show("Error: " + ss->Message, "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
             }
         }
+        catch (Exception^ deo) {
+            MessageBox::Show("Error: " + deo->Message, "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        }
         finally {
             course->Close();
         }
     }
-    };
+    private: System::Void MyForm5_Load(System::Object^ sender, System::EventArgs^ e) {
+        String^ roomconnection = "server=127.0.0.1;port=3306;user id=root;password=8787;database=ums;AllowPublicKeyRetrieval=true;SslMode=None;";
+        MySqlConnection^ roomc = gcnew MySqlConnection(roomconnection);
+        try {
+            roomc->Open();
+            String^ addroom = "SELECT DISTINCT RoomNumber FROM addroom";
+            MySqlCommand^ geog = gcnew MySqlCommand(addroom, roomc);
+            MySqlDataReader^ readog = geog->ExecuteReader();
+            while (readog->Read()) {
+                RoomCombo->Items->Add(readog["RoomNumber"]->ToString());
+            }
+        }
+        catch (MySqlException^ eree) {
+            MessageBox::Show("Error: " + eree->Message, "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        }
+        catch (Exception^ deo) {
+            MessageBox::Show("Error: " + deo->Message, "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        }
+        finally {
+            if (roomc->State != ConnectionState::Closed) {
+                roomc->Close();
+            }
+        }
+
+        String^ dayaconnection = "server=127.0.0.1;port=3306;user id=root;password=8787;database=ums;AllowPublicKeyRetrieval=true;SslMode=None;";
+        MySqlConnection^ dayc = gcnew MySqlConnection(dayaconnection);
+        try {
+            dayc->Open();
+            String^ adddayc = "SELECT DISTINCT DayName FROM addday";
+            MySqlCommand^dayC = gcnew MySqlCommand(adddayc,dayc);
+            MySqlDataReader^ readday = dayC->ExecuteReader();
+            while (readday->Read()) {
+                DayCombo->Items->Add(readday["DayName"]->ToString());
+            }
+        }
+        catch (MySqlException^ erdayd) {
+            MessageBox::Show("Error: " + erdayd->Message, "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        }
+        catch (Exception^ deoday) {
+            MessageBox::Show("Error: " + deoday->Message, "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+        }
+        finally {
+            if (dayc->State != ConnectionState::Closed) {
+                dayc->Close();
+            }
+        }
+    }
+          
+};
 }

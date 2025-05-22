@@ -118,8 +118,15 @@ namespace UMSPROJECT1 {
 	}*/
 private: System::Void Administrator_Click(System::Object^ sender, System::EventArgs^ e) {
 	this->Hide();
-	MyForm1^ admin = gcnew MyForm1();
-	admin->ShowDialog();
+	try
+	{
+		MyForm1^ admin = gcnew MyForm1();
+		admin->ShowDialog();
+		this->Show();
+	}
+	catch (Exception^ signError) {
+		MessageBox::Show("Error: " + signError->Message, "Error!", MessageBoxButtons::OK, MessageBoxIcon::Error);
+	}
 }
 };
 }
